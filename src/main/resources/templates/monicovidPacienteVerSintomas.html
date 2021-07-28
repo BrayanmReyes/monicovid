@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Registro de Sintomas</title>
+	<link rel="shortcut icon" type="image/png" th:href="@{/img/monicovid/icon_32.png}"></link>
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<link
+		href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+		rel="stylesheet" id="bootstrap-css"></link>
+
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	 -->
+</head>
+
+<body>
+	<div th:replace="fragments/monicovidHeader :: header"></div>
+	<div class="container">
+		<form method="post" th:object="${reporte}">
+			<div class="form-group">
+				<div class="form-group" style="display:none;">
+					<label for="idSintoma">ID:</label> 
+					<input type="text" th:field="*{id}" readonly="readonly"
+					class="form-control" id="id"></input>
+				</div>
+				
+				<div class="form-group" style="display:none;">
+					<label for="sintomas">Sintomas:</label> 
+					<span th:text="*{sintoma.valor}" id="sintomas"></span>
+					
+				</div>
+				
+				<div class="form-group bloque-sintomas form-bloque-sintoma">
+					<div class="indicaciones">
+						<label for="valor">El paciente presenta los siguientes síntomas:</label> 
+					</div>	
+					<div class="bloque-sintoma">
+					
+						<div class="bloque">
+							<div class="form-check">	
+								<input id="flexCheckDefault" name="sintoma[0]" class="form-check-input" type="checkbox" th:value="0"/>
+								<label class="form-check-label" for="flexCheckDefault">
+									Dolor muscular o articulaciones
+								</label>
+							</div>
+							<div class="form-check">
+								<input id="flexCheckDefault" name="sintoma[1]" class="form-check-input" type="checkbox" th:value="1"/>
+								<label class="form-check-label" for="flexCheckDefault">
+									Malestar general o fatiga
+								</label>
+							</div>
+							<div class="form-check">	
+								<input id="flexCheckDefault" name="sintoma[2]" class="form-check-input" type="checkbox" th:value="2"/>
+								<label class="form-check-label" for="flexCheckDefault">
+									Tos seca
+								</label>
+							</div>
+							<div class="form-check">
+								<input id="flexCheckDefault" name="sintoma[3]" class="form-check-input" type="checkbox" th:value="3"/>
+								<label class="form-check-label" for="flexCheckDefault">
+									Dolor de garganta
+								</label>
+							</div>
+							<div class="form-check">	
+								<input id="flexCheckDefault" name="sintoma[4]" class="form-check-input" type="checkbox" th:value="4"/>
+								<label class="form-check-label" for="flexCheckDefault">
+									Pérdida del gusto
+								</label>
+							</div>
+						</div>
+						<div class="bloque">
+							<div class="form-check">
+								<input id="flexCheckDefault" name="sintoma[5]" class="form-check-input" type="checkbox" th:value="5"/>
+								<label class="form-check-label" for="flexCheckDefault">
+									Pérdida del olfato
+								</label>
+							</div>
+							<div class="form-check">	
+								<input id="flexCheckDefault" name="sintoma[6]" class="form-check-input" type="checkbox" th:value="6"/>
+								<label class="form-check-label" for="flexCheckDefault">
+									Enrojecimiento de la piel
+								</label>
+							</div>
+							<div class="form-check">
+								<input id="flexCheckDefault" name="sintoma[7]" class="form-check-input" type="checkbox" th:value="7"/>
+								<label class="form-check-label" for="flexCheckDefault">
+									Diarrea
+								</label>
+							</div>
+							<div class="form-check">	
+								<input id="flexCheckDefault" name="sintoma[8]" class="form-check-input" type="checkbox" th:value="8"/>
+								<label class="form-check-label" for="flexCheckDefault">
+									Vómitos
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>	
+				
+			</div>
+			<br>
+			
+			<div class="botones">
+				<a href="javascript:history.back()" class="btn btn-primary">Atrás</a>
+			</div>
+		</form>
+	</div>
+	<div th:replace="fragments/monicovidFooter :: footer"></div>
+	<script>
+		var sintomas = $("#sintomas").text();
+		for(i = 0; i < 9; i++){
+		if(sintomas.includes(i)){
+			if($('[name="sintoma[' + i + ']"]').val() == i)
+				$('[name="sintoma[' + i + ']"]').attr('checked',true);
+			
+			}
+			$('[name="sintoma[' + i + ']"]').attr('disabled', 'disabled');
+		}
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>

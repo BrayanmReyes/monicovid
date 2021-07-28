@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>MODIFICAR CONTRASEÑA</title>
+<link rel="shortcut icon" type="image/png" th:href="@{/img/monicovid/icon_32.png}"></link>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/asesor.js}"></script>
+	 <link rel="icon" type="image/png" href="/images/logo/iama.png">
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.js"></script> 
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
+	<script src="https://kit.fontawesome.com/814638b048.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div th:replace="fragments/monicovidHeader :: header"></div>
+	<div class="container">
+		<form th:action="@{/sesion/actualizarContrasenia}" method="post"
+			th:object="${usuario}">
+			<div class="form-group">
+				
+				<div class="form-group">
+				<label for="password">Password:</label> 
+				<input type="password"	th:field="*{password}"
+				class="form-control" id="password"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('password')}"
+				th:errors="*{password}"></div>
+				
+				</div>
+				
+				<div class="form-group">
+				<label for="confirmPassword">Confirmar Password:</label> 
+				<input type="password"	th:field="*{confirmPassword}"
+				class="form-control" id="confirmPassword"></input>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('confirmPassword')}"
+				th:errors="*{confirmPassword}"></div>
+				
+				</div>
+							
+			
+				</div>
+			<button type ="submit" class="btn btn-primary">Aceptar</button>
+			<a th:href="@{/monicovid/index}" class="btn btn-danger">Cancelar</a>
+		</form>
+		<br>
+		
+				<div class="alert alert-warning alert-dismissible fade show" role="alert" style="opacity:1;" th:if="${errormessage}"> 
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button> 
+				<strong th:text="${errormessage}"></strong> </div>
+	
+	</div>
+	<div th:replace="fragments/monicovidFooter :: footer"></div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>

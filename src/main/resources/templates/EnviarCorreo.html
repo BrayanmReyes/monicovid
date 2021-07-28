@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>CORREO</title>
+<link rel="shortcut icon" type="image/png" th:href="@{/img/monicovid/icon_32.png}"></link>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/asesor.js}"></script>
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container">
+		<form th:action="@{/evaluacion/enviarCorreo}" method="post"
+			th:object="${email}">
+			<div class="form-group">				
+				
+				<div class="form-group">
+					<label for="toEmail">Email:</label>
+					<select class="form-control" th:field="*{toEmail}">
+						<option th:each="c: ${listaEstudiantes}" th:value="${c.email}" 
+						th:text="${c.email}" 
+						th:selected="(${c.email} == *{toEmail})"></option>
+					</select>				
+				</div>
+				<div class="form-group">
+					<label for="asuntoEmail">Asunto:</label>
+					<label  th:text="*{asuntoEmail}"></label> 
+					<input type="text" th:field="*{asuntoEmail}"
+					class="form-control" id="asuntoEmail"></input>
+					<div class="alert alert-danger" 
+					th:if="${#fields.hasErrors('asuntoEmail')}"
+					th:errors="*{asuntoEmail}"></div>				
+				</div>
+				
+				<div class="form-group">
+					<label for="mensajeEmail">Mensaje:</label>
+					<label  th:text="*{mensajeEmail}"></label> 
+					<textarea rows="10" cols="10" th:field="*{mensajeEmail}"
+					class="form-control" id="mensajeEmail"></textarea>
+					<div class="alert alert-danger" 
+					th:if="${#fields.hasErrors('mensajeEmail')}"
+					th:errors="*{mensajeEmail}"></div>				
+				</div>
+				
+				
+			</div>
+			<button type ="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/evaluacion/back" class="btn btn-danger">Cancelar</a>
+		</form>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>

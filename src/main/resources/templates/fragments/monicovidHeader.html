@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+	<meta charset="UTF-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+</head>
+<body>
+	
+	<div th:fragment="header">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+		
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script> 
+    	<script src="https://kit.fontawesome.com/53c802e271.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/Header.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/Body.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/graph.css}" />
+		<div class="barra">  
+			<!-- INCIO NAV -->
+			<nav class="navbar navbar-expand-lg navbar-light navegacion">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand logo" th:href="@{/monicovid/index}"><img th:src="@{/img/monicovid/icon_64.png}"></a>
+					</div>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarColor02">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item dropdown item-header">
+							<div class="btn-desplegable">
+								<a class="nav-link dropdown-toggle" id="navbarDropdown" sec:authorize="hasRole('ROLE_ADMIN')" 
+								data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">REGISTRAR MIS PARÁMETROS</a>
+								<ul class="dropdown-menu normal-views" aria-labelledby="navbarDropdown">
+									<li><a class="dropdown-item" href="#" th:href="@{/temperatura/irRegistrar}">TEMPERATURA (T°)</a></li>
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item" href="#" th:href="@{/oxigeno/irRegistrar}">OXIGENACIÓN (SPO2)</a></li>
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item" href="#" th:href="@{/sintoma/irRegistrar}">SÍNTOMAS</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item dropdown item-header">
+							<div class="btn-desplegable">
+								<a class="nav-link dropdown-toggle" sec:authorize="hasRole('ROLE_ADMIN')" href="#" id="navbarDropdown"
+								role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="true">VISUALIZAR REPORTES</a>
+								<ul class="dropdown-menu normal-views" aria-labelledby="navbarDropdown">
+									<li><a class="dropdown-item" href="#" th:href="@{/graph/reporteTemperatura}">TEMPERATURA (T°)</a></li>
+									<li><div class="dropdown-divider"></div></li>
+									<li><a class="dropdown-item" href="#" th:href="@{/graph/reporteOxigenacion}">OXIGENACIÓN (SPO2)</a></li>
+									<li><div class="dropdown-divider"></div></li>
+									<li><a class="dropdown-item" href="#" th:href="@{/sintoma/listar}">SÍNTOMAS</a></li>
+									<li><div class="dropdown-divider"></div></li>
+									<li><a class="dropdown-item" href="#" th:href="@{/reporte/verReportes}">TODOS</a></li>
+									<li><div class="dropdown-divider"></div></li>
+									<li><a class="dropdown-item" href="#" th:href="@{/medico/verReportes}">MEDICO</a></li>
+									<li><div class="dropdown-divider"></div></li>
+									<li><a class="dropdown-item" href="#" th:href="@{/medico/test}">TEST</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item dropdown item-header">
+							<div class="btn-desplegable">
+								<a class="nav-link dropdown-toggle" id="navbarDropdown" sec:authorize="hasRole('ROLE_ADMIN')" 
+								data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">VISUALIZAR CONTACTOS</a>
+								<ul class="dropdown-menu normal-views" aria-labelledby="navbarDropdown">
+									<li><a class="dropdown-item" href="#" th:href="@{/contacto/irRegistrar}">REGISTRAR</a></li>
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item" href="#" th:href="@{/contacto/listar}">LISTAR</a></li>
+								</ul>
+							</div>
+						</li>
+						
+						<li class="nav-item item-header item-header">
+							<a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" 
+							href="https://www.google.com.pe/maps/search/centros+de+salud+cercanos+a+mi+ubicación/" target="_blank">VER CENTROS DE SALUD CERCANOS</a>
+						</li>
+						<!-- <li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" sec:authorize="hasRole('ROLE_ADMIN')" 
+							href="#" id="navbarDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="true">API</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="#" th:href="@{/graph/irAlerta}">Ver alerta</a>
+							</div>
+						</li> -->
+						<li class="nav-item item-header">
+							<div class="btn-desplegable">
+								<ul class="navbar-nav navbar-right">
+									<li class="dropdown show">
+										<a id="dropdownMenuLink" class="btn btn-outline-primary dropdown-toggle" href="#"
+										role="button" data-bs-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false"> 
+										<!-- <span	sec:authentication="name"></span> -->
+										<span><i class="fas fa-user"></i></span>
+										</a>
+										<div class="dropdown-menu">
+											<form id="logoutForm" th:action="@{/logout}" method="post">
+												<button class="dropdown-item dropdown-item-formato" onclick="document.getElementById('logoutForm').submit();"
+													type="submit">Cerrar Sesion
+												</button>
+											</form>
+											<form id="changePassword" th:action="@{/sesion/irModificarContrasenia}" method="post">
+												<button class="dropdown-item dropdown-item-formato" type="submit">Cambiar Contraseña
+												</button>
+											</form>
+										</div>
+									</li>		
+								</ul>
+							</div>
+						</li>
+						</ul>
+						
+					</div>
+					
+				</div>
+			</nav>
+        </div>
+	</div>
+
+</body>
+
+</html>

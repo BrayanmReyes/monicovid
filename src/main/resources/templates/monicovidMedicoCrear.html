@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Crear Cuenta Medico</title>
+	<link rel="shortcut icon" type="image/png" th:href="@{/img/monicovid/icon_32.png}"></link>
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<link
+		href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+		rel="stylesheet" id="bootstrap-css"></link>
+
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+	<!-- Script para mostrar las coordenadas-->
+	<script type="text/javascript">
+		if (navigator.geolocation) { //Validar si hay acceso web a la ubicación
+			navigator.geolocation.getCurrentPosition(mostrarUbicacion); //Obtiene la posición
+			} else {
+			alert("¡Error! Este navegador no soporta la Geolocalización.");
+		}
+		
+		//Funcion para obtener latitud y longitud
+		function mostrarUbicacion(position) {
+			var latitud = position.coords.latitude; //Obtener latitud
+			var longitud = position.coords.longitude; //Obtener longitud
+			var div = document.getElementById("coordenadas");
+			div.innerHTML = "<br>Latitud: " + latitud + "<br>Longitud: " + longitud; //Imprime latitud y longitud
+			var txt = document.getElementById("direccion");
+			txt.value=latitud + "," + longitud;
+		}
+	</script>		
+</head>
+<body>
+	<br>
+	<br>
+	<div class="container">
+		<form th:action="@{/cuenta/registrarMedico}" method="post"
+			th:object="${usuario}">
+			<h3>Crear cuenta como Médico</h3>
+			<div id="coordenadas" style="display:none;"></div>
+			<br>
+			<div class="form-group">
+				<div class="form-group" style="display:none;">
+					<label for="id">ID:</label> 
+					<input type="text" th:field="*{id}"></input>
+				</div>
+				<div class="form-group">
+					<label for="dni">DNI:</label> 
+					<input type="text"	th:field="*{dni}"
+					class="form-control" id="dni" maxlength="10"></input>
+					<div class="alert alert-danger" 
+					th:if="${#fields.hasErrors('dni')}"
+					th:errors="*{dni}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="username">Correo Electrónico:</label> 
+					<input type="text"	th:field="*{username}"
+					class="form-control" id="username" maxlength="50"></input>
+					<div class="alert alert-danger" 
+					th:if="${#fields.hasErrors('username')}"
+					th:errors="*{username}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="nombre">Nombre:</label> 
+					<input type="text"	th:field="*{nombre}"
+					class="form-control" id="nombre"></input>
+					<div class="alert alert-danger" 
+					th:if="${#fields.hasErrors('nombre')}"
+					th:errors="*{nombre}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="apellido">Apellido:</label> 
+					<input type="text"	th:field="*{apellido}"
+					class="form-control" id="apellido"></input>
+					<div class="alert alert-danger" 
+					th:if="${#fields.hasErrors('apellido')}"
+					th:errors="*{apellido}"></div>
+				</div>
+
+				<div class="form-group">
+					<label for="password">Password:</label> 
+					<input type="password"	th:field="*{password}"
+					class="form-control" id="password"></input>
+					<div class="alert alert-danger" 
+					th:if="${#fields.hasErrors('password')}"
+					th:errors="*{password}"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="confirmPassword">Confirmar Password:</label> 
+					<input type="password"	th:field="*{confirmPassword}"
+					class="form-control" id="confirmPassword"></input>
+					<div class="alert alert-danger" 
+					th:if="${#fields.hasErrors('confirmPassword')}"
+					th:errors="*{confirmPassword}"></div>
+				</div>
+				
+				<div class="form-group" style="display:none;">
+					<label for="direccion">Dirección:</label> 
+					<input type="text"	th:field="*{direccion}"
+					class="form-control" id="direccion"></input>
+					<div class="alert alert-danger" 
+					th:if="${#fields.hasErrors('direccion')}"
+					th:errors="*{direccion}"></div>
+				</div>		
+				
+				<div class="form-group" style="display:none;">
+				<label for="autoridad">Rol:</label> 
+				<select class="form-control" th:field="*{autoridad}" id="autoridad" name="autoridad">
+					<option th:value="ROLE_MEDICO" th:text="MEDICO"/>
+				</select>
+				</div>
+
+				<div class="form-group" style="display:none;">
+				<label for="habilitado">Habilitado:</label> 
+				<select class="form-control" th:field="*{enable}" id="enable">
+					<option th:value="true" th:text="Habilitado"/>
+				</select>
+				<div class="alert alert-danger" 
+				th:if="${#fields.hasErrors('enable')}"
+				th:errors="*{enable}"></div>
+				</div>
+
+			</div>	
+		
+			<button type ="submit" class="btn btn-primary">Aceptar</button>
+			<a href="/login" class="btn btn-danger">Cancelar</a>
+		</form>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>

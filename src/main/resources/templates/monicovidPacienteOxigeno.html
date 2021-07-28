@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Registro de O2</title>
+	<link rel="shortcut icon" type="image/png" th:href="@{/img/monicovid/icon_32.png}"></link>
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<link
+		href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+		rel="stylesheet" id="bootstrap-css">
+	</link>
+
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js">
+	</script>
+	 -->
+	<script type="text/javascript">
+		function handleMouseMove(value) {
+		const rangeValueElement = document.querySelector("#range-oxigeno")
+		const inputElement = document.querySelector('input[type="range"]')
+		const fillAreaElement = document.querySelector(".fill-area")
+
+		const hueRotate = "hue-rotate(" + value + "deg)"
+
+		var valorOxigeno = document.getElementById("range")
+		
+		rangeValueElement.textContent = value
+		//rangeValueElement.style.filter = hueRotate
+
+		//inputElement.style.filter = hueRotate
+
+		fillAreaElement.style.left = value + "vw"
+		fillAreaElement.style.width = (100-value) + "vw"
+		fillAreaElement.style.filter = hueRotate
+		
+		valorOxigeno.value = value
+		}
+	</script>
+</head>
+<body>
+	<div th:replace="fragments/monicovidHeader :: header"></div>
+	<div class="container">
+		<div class="titulo" align= "center">
+			<h1>SATURACIÓN DE OXÍGENO</h1>
+		</div>
+		<form th:action="@{/oxigeno/registrar}" method="post"
+			th:object="${oxigeno}">
+			<div class="form-group">
+				<div class="form-group" style="display:none;">
+					<label for="idTemperatura">ID:</label> 
+					<input type="text" th:field="*{idOxigeno}" readonly="readonly"
+					class="form-control" id="idOxigeno"></input>
+				</div>
+				
+				<div class="form-group" style="display:none;">
+					<label for="name">ID DEL PACIENTE:</label> 
+					<input type="text"	th:field="*{paciente.id}"
+					class="form-control" id="name"></input>
+					<div class="alert alert-danger" 
+					th:if="${#fields.hasErrors('paciente')}"
+					th:errors="*{paciente}"></div>
+				</div>
+				<br>
+				<br>
+				<br>
+				<div class="form-group">
+					<figure class="imagen-texto-parametro texto-oxigeno">
+						<div class="recomendaciones recomendaciones-oxigeno" align="center">
+
+						<h2>Recomendaciones</h2>
+							<ul>
+								<li><p style="text-align: justify;">Asegúrese de que la uña no tenga esmalte</p></li>
+								<li><p style="text-align: justify;">Que la mano esté tibia, relajada y sostenida por debajo del nivel del corazón</p></li>
+								<li><p style="text-align: justify;">Debe también sentarse quieto y no mover la parte del cuerpo donde se encuentra el oxímetro de pulso</p></li>
+								<li><p style="text-align: justify;">Espere unos segundos hasta que la lectura deje de cambiar y muestre un número fijo</p></li>
+							</ul>
+						</div>
+						<div class="parametro parametro-oxigeno" align="center">
+							<img class="img-oxigeno" src="/img/monicovid/datos/so2_img.png" alt="">
+						</div>
+					</figure>		    
+				</div>
+				<div class="form-group">
+					<br>
+					<br>
+					<br>
+					<div align= "center">
+						<main>
+							<div class="fill-area"></div>
+							<label id="range-oxigeno" class="range-value" for="range">84</label>
+							<br>
+							 
+							<input id="range" type="range" name="range" th:field="*{valor}" min="84.0" max="100.0" step="0.1" onmousemove="handleMouseMove(this.value)" onchange="handleMouseMove(this.value)" list="tickmarks"/>
+							<br>
+							<div id="tickmarks">
+								<p>84</p>
+								<div class="marca-out impar">
+								<p>85</p>
+								</div>
+								<div class="marca-out par">
+								<p>86</p>
+								</div>
+								<div class="marca-out impar">
+								<p>87</p>
+								</div>
+								<div class="marca-out">
+								<p>88</p>
+								</div>
+								<div class="marca-out impar">
+								<p>89</p>
+								</div>
+								<div class="marca-out par">
+								<p>90</p>
+								</div>
+								<div class="marca-out impar">
+								<p>91</p>
+								</div>
+								<div class="">
+								<p>92</p>
+								</div>
+								<div class="marca-out impar">
+								<p>93</p>
+								</div>
+								<div class="marca-out par">
+								<p>94</p>
+								</div>
+								<div class="marca-out impar">
+								<p>95</p>
+								</div>
+								<div class="marca-out">
+								<p>96</p>
+								</div>
+								<div class="marca-out impar">
+								<p>97</p>
+								</div>
+								<div class="marca-out par">
+								<p>98</p>
+								</div>
+								<div class="marca-out impar">
+								<p>99</p>
+								</div>
+								<p>100</p>
+							</div>
+						</main>				
+					</div>
+				</div>				
+						
+				<div class="form-group" style="display:none;">
+					<label for="fechaRegistro">FECHA DE REGISTRO:</label> 
+					<input type="text"	th:field="*{fechaRegistro}"
+					class="form-control" id="fechaRegistro" readonly="readonly"></input>
+					<div class="alert alert-danger" 
+					th:if="${#fields.hasErrors('fechaRegistro')}"
+					th:errors="*{fechaRegistro}"></div>
+				</div>
+	
+			</div>
+			<br>
+			<br>
+			<br>
+			<div class="botones">
+				<button type ="submit" class="btn btn-primary">Aceptar</button>
+				<a href="/oxigeno/listar" class="cancelar">Cancelar</a>
+			</div>
+		</form>
+	</div>
+	<div th:replace="fragments/monicovidFooter :: footer"></div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>

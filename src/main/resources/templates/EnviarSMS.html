@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>ENVIAR SMS</title>
+<link rel="shortcut icon" type="image/png" th:href="@{/img/monicovid/icon_32.png}"></link>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css"></link>
+
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<button onclick="sendSMS()">Enviar SMS</button>
+	</div>
+	<script
+	  src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
+	  integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
+	  crossorigin="anonymous"></script>
+	<script>
+		//USERNAME: monicovid
+		//PW: mc2021
+		var sendSMS = function(){
+			$.ajax({
+				url: 'http://192.168.0.8:8090/SendSMS?username=monicovid&password=mc2021&phone=051993802367&message=HOLA+ALVARO',
+				data: {},
+				type: 'GET',
+				success: function(data){
+					console.log(data);
+				},
+				error: function(){
+					console.log('Error found!');
+				}
+			});
+		}
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>
