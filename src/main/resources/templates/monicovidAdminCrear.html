@@ -32,6 +32,7 @@
 	</script>		
 </head>
 <body>
+	<div th:replace="fragments/monicovidHeader :: header"></div>
 	<div class="container">
 		<form th:action="@{/cuenta/registrarAdmin}" method="post"
 			th:object="${usuario}">

@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Crear Cuenta Paciente</title>
+<!--  
 <link rel="shortcut icon" type="image/png" th:href="@{/img/monicovid/icon_32.png}"></link>
-<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css"></link>
-
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
- --><!-- Script para mostrar las coordenadas-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"></link>
+<script	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+-->
+<!-- Script para mostrar las coordenadas-->
 <script type="text/javascript">
 	if (navigator.geolocation) { //Validar si hay acceso web a la ubicación
 		navigator.geolocation.getCurrentPosition(mostrarUbicacion); //Obtiene la posición
@@ -36,7 +33,7 @@
 </script>	
 </head>
 <body>
-	<br>
+<div th:replace="fragments/monicovidHeader :: header"></div>
 	<div class="container">
 		<h3>Crear Cuenta</h3>
 		<div id="coordenadas" style="display:none;"></div>
